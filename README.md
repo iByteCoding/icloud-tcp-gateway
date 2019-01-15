@@ -1,9 +1,9 @@
 # icloud-tcp-gateway
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![last-commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat-square)](https://github.com/lishangzhi/icloud-tcp-gateway)
-[![watchers](https://img.shields.io/github/watchers/badges/shields.svg?label=Watch&style=social)](https://github.com/lishangzhi/icloud-tcp-gateway)
+[![last-commit](https://img.shields.io/github/last-commit/google/skia.svg?style=social)](https://github.com/lishangzhi/icloud-tcp-gateway)
 [![code-size](https://img.shields.io/github/languages/code-size/badges/shields.svg)](https://github.com/lishangzhi/icloud-tcp-gateway.git)
+[![watchers](https://img.shields.io/github/watchers/badges/shields.svg?label=Watch&style=social)](https://github.com/lishangzhi/icloud-tcp-gateway)
 
 #### 介绍
 物联网设备网关技术架构设计（Session 管理、心跳管理、数据上行、数据下行）
