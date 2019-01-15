@@ -1,5 +1,5 @@
 package com.icloud.iot.tcp.client;
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.gitee.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
 import com.icloud.iot.tcp.data.Protocol;
 
 import io.netty.bootstrap.Bootstrap;
