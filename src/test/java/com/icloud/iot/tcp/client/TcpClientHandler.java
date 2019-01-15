@@ -1,6 +1,6 @@
 package com.icloud.iot.tcp.client;
 
-import com.gitee.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
