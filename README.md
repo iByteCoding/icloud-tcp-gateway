@@ -1,6 +1,7 @@
 # icloud-tcp-gateway
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![code-size](https://img.shields.io/github/languages/code-size/badges/shields.svg)](https://github.com/lishangzhi/icloud-tcp-gateway.git)
 
 #### 介绍
 物联网设备网关技术架构设计（Session 管理、心跳管理、数据上行、数据下行）
