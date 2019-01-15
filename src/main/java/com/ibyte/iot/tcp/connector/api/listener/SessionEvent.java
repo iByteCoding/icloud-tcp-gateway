@@ -28,25 +28,32 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.api.listener;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.Session;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import java.util.EventObject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+/**
+ * This is the class representing event notifications for changes to sessions
+ * within a TSM application.
+ */
+public class SessionEvent extends EventObject {
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    /**
+     * Constructs a prototypical Event.
+     *
+     * @param source The object on which the Event initially occurred.
+     * @throws IllegalArgumentException if source is null.
+     */
+    public SessionEvent(Object source) {
+        super(source);
+    }
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
-
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
-
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    /**
+     * Return the session that changed.
+     */
+    public Session getSession() {
+        return (Session) super.getSource();
     }
 }

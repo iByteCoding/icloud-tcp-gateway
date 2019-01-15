@@ -28,25 +28,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.common.Endpoint;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+/**
+ * Created by Li.shangzhi on 17/1/10.
+ */
+public interface Session extends Endpoint {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    /**
+     * Update the accessed time information for this session.  This method
+     * should be called by the context when a request comes in for a particular
+     * session, even if the application does not reference it.
+     */
+    void access();
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    /**
+     * Inform the listeners about the new session and open connection.
+     */
+    void connect();
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    /**
+     * Perform the internal processing required to invalidate this session,
+     * without triggering an exception if the session has already expired.
+     * then close the connection.
+     */
+    void close();
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    /**
+     * Release all object references, and initialize instance variables, in
+     * preparation for reuse of this object.
+     */
+    void recycle();
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
-    }
+    boolean expire();
+
 }

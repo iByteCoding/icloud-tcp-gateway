@@ -28,25 +28,44 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.api;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.Connection;
+import com.ibyte.iot.tcp.connector.Session;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+/**
+ * Created by Li.shangzhi on 17/1/10.
+ */
+public abstract class ExchangeConnection<T> implements Connection<T> {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    protected Session session = null;
+    protected String connectionId = null;
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    protected volatile boolean close = false;
+    protected int connectTimeout = 60 * 60 * 1000; // ms
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
-
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
-
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    public void fireError(RuntimeException e) {
+        throw e;
     }
+
+    public boolean isClosed() {
+        return close;
+    }
+
+    public void setConnectionId(String connectionId) {
+        this.connectionId = connectionId;
+    }
+
+    public String getConnectionId() {
+        return connectionId;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
 }

@@ -28,25 +28,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.exception;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+public class InitErrorException extends RuntimeException {
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+    private static final long serialVersionUID = 4401440531171871948L;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    private int errorCode = 1;
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    private String errorMsg;
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    protected InitErrorException() {
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    }
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    public InitErrorException(String errorMsg, Throwable e) {
+        super(errorMsg, e);
+        this.errorMsg = errorMsg;
+    }
+
+    public InitErrorException(String errorMsg) {
+        super(errorMsg);
+        this.errorMsg = errorMsg;
     }
 }

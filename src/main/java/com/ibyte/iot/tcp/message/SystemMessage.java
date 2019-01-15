@@ -28,25 +28,28 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.message;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import java.io.Serializable;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+public class SystemMessage implements Serializable {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    private String remoteAddress;
+    private String localAddress;
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    public String getRemoteAddress() {
+        return remoteAddress;
+    }
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public void setRemoteAddress(String remoteAddress) {
+        this.remoteAddress = remoteAddress;
+    }
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    public String getLocalAddress() {
+        return localAddress;
+    }
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    public void setLocalAddress(String localAddress) {
+        this.localAddress = localAddress;
     }
 }

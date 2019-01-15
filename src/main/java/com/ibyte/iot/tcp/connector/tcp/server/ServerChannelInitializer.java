@@ -28,25 +28,36 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.tcp.server;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.tcp.codec.ProtobufAdapter;
+import com.ibyte.iot.tcp.connector.tcp.config.ServerTransportConfig;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+@ChannelHandler.Sharable
+public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    private ServerTransportConfig config;
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public ServerChannelInitializer(ServerTransportConfig config) {
+        this.config = config;
+    }
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    @Override
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+        ProtobufAdapter adapter = new ProtobufAdapter(config);
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+        ChannelPipeline pipeline = socketChannel.pipeline();
+        pipeline.addLast("frameDecoder", new ProtobufVarint32FrameDecoder());
+        pipeline.addLast("decoder", adapter.getDecoder());
+        pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
+        pipeline.addLast("encoder", adapter.getEncoder());
+        pipeline.addLast("handler", new TcpServerHandler(config));
     }
 }

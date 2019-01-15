@@ -28,25 +28,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.exception;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+public class PushException extends IllegalStateException {
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+    private static final long serialVersionUID = -4953949710626671131L;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    public PushException() {
+        super();
+    }
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    public PushException(String message) {
+        super(message);
+    }
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public PushException(Throwable throwable) {
+        super(throwable);
+    }
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
-
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    public PushException(String message, Throwable throwable) {
+        super(message, throwable);
     }
 }

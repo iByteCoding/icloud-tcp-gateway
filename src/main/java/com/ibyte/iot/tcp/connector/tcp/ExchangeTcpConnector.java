@@ -28,25 +28,48 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.tcp;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.Session;
+import com.ibyte.iot.tcp.connector.api.ExchangeConnector;
+import com.ibyte.iot.tcp.message.MessageWrapper;
 
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+public abstract class ExchangeTcpConnector<T> extends ExchangeConnector<T> {
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    protected TcpSessionManager tcpSessionManager = null;
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public abstract void connect(ChannelHandlerContext ctx, MessageWrapper wrapper);
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    public abstract void close(MessageWrapper wrapper);
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    /**
+     * 会话心跳
+     *
+     * @param wrapper
+     */
+    public abstract void heartbeatClient(MessageWrapper wrapper);
+
+    /**
+     * 接收客户端消息通知响应
+     *
+     * @param wrapper
+     */
+    public abstract void responseSendMessage(MessageWrapper wrapper);
+
+    public abstract void responseNoKeepAliveMessage(ChannelHandlerContext ctx, MessageWrapper wrapper);
+
+    public void send(String sessionId, T message) throws Exception {
+        super.send(tcpSessionManager, sessionId, message);
+    }
+
+    public boolean exist(String sessionId) throws Exception {
+        Session session = tcpSessionManager.getSession(sessionId);
+        return session != null ? true : false;
+    }
+
+    public void setTcpSessionManager(TcpSessionManager tcpSessionManager) {
+        this.tcpSessionManager = tcpSessionManager;
     }
 }

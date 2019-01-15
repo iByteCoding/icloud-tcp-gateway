@@ -28,25 +28,78 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import java.util.Set;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+/**
+ * Created by Li.shangzhi on 17/1/10.
+ */
+public interface SessionManager {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    /**
+     * 添加指定session
+     *
+     * @param session
+     */
+    void addSession(Session session);
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    void updateSession(String sessionId);
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    /**
+     * 删除指定session
+     *
+     * @param session
+     */
+    void removeSession(Session session);
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    /**
+     * 删除指定session
+     *
+     * @param sessionId
+     */
+    void removeSession(String sessionId);
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
-    }
+    /**
+     * 根据指定sessionId获取session
+     *
+     * @param sessionId
+     * @return
+     */
+    Session getSession(String sessionId);
+
+    /**
+     * 获取所有的session
+     *
+     * @return
+     */
+    Session[] getSessions();
+
+    /**
+     * 获取所有的session的id集合
+     *
+     * @return
+     */
+    Set<String> getSessionKeys();
+
+    /**
+     * 获取所有的session数目
+     *
+     * @return
+     */
+    int getSessionCount();
+
+    /**
+     * Return the default maximum inactive interval (in seconds)
+     * for Sessions created by this Manager.
+     */
+    int getMaxInactiveInterval();
+
+    /**
+     * Set the default maximum inactive interval (in seconds)
+     * for Sessions created by this Manager.
+     *
+     * @param interval The new default value
+     */
+    void setMaxInactiveInterval(int interval);
 }

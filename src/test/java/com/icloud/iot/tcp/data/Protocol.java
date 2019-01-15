@@ -1,5 +1,5 @@
 package com.icloud.iot.tcp.data;
-import com.icloud.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 

@@ -28,25 +28,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.api.listener;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import java.util.EventListener;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+/**
+ * Implementations of this interface are notified of changes to the list of
+ * active sessions in a TSM application. To receive notification events, the
+ * implementation class must be configured in the deployment descriptor for the
+ * TSM application.
+ */
+public interface SessionListener extends EventListener {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    /**
+     * Notification that a session was created.
+     *
+     * @param se the notification event
+     */
+    void sessionCreated(SessionEvent se);
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
-
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
-
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
-
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
-    }
+    /**
+     * Notification that a session is about to be invalidated.
+     *
+     * @param se the notification event
+     */
+    void sessionDestroyed(SessionEvent se);
 }

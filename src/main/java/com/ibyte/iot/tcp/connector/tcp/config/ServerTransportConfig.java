@@ -28,25 +28,43 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.tcp.config;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.tcp.TcpConnector;
+import com.ibyte.iot.tcp.invoke.ApiProxy;
+import com.ibyte.iot.tcp.notify.NotifyProxy;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+public class ServerTransportConfig {
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    // handler
+    private TcpConnector tcpConnector = null;
+    // codec
+    private ProtobufDecoder decoder = null;
+    // invoke
+    private ApiProxy proxy = null;
+    private NotifyProxy notify = null;
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public ServerTransportConfig(TcpConnector tcpConnector, ApiProxy proxy, NotifyProxy notify) {
+        this.tcpConnector = tcpConnector;
+        this.proxy = proxy;
+        this.notify = notify;
+    }
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    public TcpConnector getTcpConnector() {
+        return tcpConnector;
+    }
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    public ProtobufDecoder getDecoder() {
+        return decoder;
+    }
+
+    public ApiProxy getProxy() {
+        return proxy;
+    }
+
+    public NotifyProxy getNotify() {
+        return notify;
     }
 }

@@ -28,25 +28,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.constant;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import io.netty.util.AttributeKey;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+public class Constants {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    /**
+     * 默认启动端口，包括不配置或者随机，都从此端口开始计算
+     */
+    public static final int DEFAULT_SERVER_PORT = 22000;
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    public static final int NOTIFY_SUCCESS = 1;
+    public static final int NOTIFY_FAILURE = 0;
+    public static final int NOTIFY_NO_SESSION = 2;
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public static final AttributeKey<String> SERVER_SESSION_HOOK = AttributeKey.valueOf("SERVER_SESSION_HOOK");
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
-
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
-    }
 }

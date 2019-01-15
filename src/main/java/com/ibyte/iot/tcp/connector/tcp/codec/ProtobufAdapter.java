@@ -28,25 +28,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.tcp.codec;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.tcp.config.ServerTransportConfig;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+public class ProtobufAdapter {
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    private ProtobufDecoder decoder = new ProtobufDecoder(MessageBuf.JMTransfer.getDefaultInstance());
+    private ProtobufEncoder encoder = new ProtobufEncoder();
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
+    public ProtobufAdapter(ServerTransportConfig config) {
+        // nothing to do
+    }
 
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
+    public ProtobufDecoder getDecoder() {
+        return decoder;
+    }
 
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
+    public ProtobufEncoder getEncoder() {
+        return encoder;
     }
 }

@@ -28,25 +28,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.icloud.iot.tcp.client;
+package com.ibyte.iot.tcp.connector.tcp;
 
-import com.ibyte.iot.tcp.connector.tcp.codec.MessageBuf;
+import com.ibyte.iot.tcp.connector.Session;
+import com.ibyte.iot.tcp.connector.api.ExchangeSessionManager;
 
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+public abstract class ExchangeTcpSessionManager extends ExchangeSessionManager {
 
-//public class TcpClientHandler extends ChannelHandlerAdapter {
-public class TcpClientHandler extends ChannelInboundHandlerAdapter {
+    public abstract Session createSession(String sessionId, ChannelHandlerContext ctx);
 
-    private final static Logger logger = LoggerFactory.getLogger(TcpClientHandler.class);
-
-    public void channelRead(ChannelHandlerContext ctx, Object o) throws Exception {
-        MessageBuf.JMTransfer message = (MessageBuf.JMTransfer) o;
-
-        logger.info("Client Received Msg :" + message);
-        System.out.println("Client Received Msg :" + message);
-    }
 }
