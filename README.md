@@ -9,6 +9,7 @@
 #### 介绍
 物联网设备网关技术架构设计（Session 管理、心跳管理、数据上行、数据下行）
 
+![](https://images.gitee.com/uploads/images/2019/0116/150139_4377424a_1468963.png "屏幕截图.png")
 
 #### 说明
 - TcpServer ：提供TCP连接服务
@@ -21,5 +22,6 @@
 
 > 以上都是默认配置,你可以不修改，但是你可能需要换个TCP端口
 
-
+#### TCP网关执行时序图
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0116/150230_e846b0a7_1468963.png "屏幕截图.png")
 
