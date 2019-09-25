@@ -61,7 +61,11 @@ public class TcpClient {
         }
     }
 
-
+    /**
+     * 程序启动 Client
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         try {
             TcpClient.connect(Protocol.generateConnect());

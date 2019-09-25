@@ -25,3 +25,21 @@
 #### TCP网关执行时序图
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0116/150230_e846b0a7_1468963.png "屏幕截图.png")
 
+
+### 程序运行案例步骤
+
+#### 1.配置本地Host
+Window 地址 // C:\Windows\System32\drivers\etc\hosts
+
+添加
+`` 127.0.0.1  iot-open.icloud.com ``
+
+#### 2.启动Server
+位置: ``com.ibyte.iot.test.server.TestTcpServer``
+
+#### 2.启动Client
+位置: ``com.ibyte.iot.test.client.TcpClient``
+
+
+
+
