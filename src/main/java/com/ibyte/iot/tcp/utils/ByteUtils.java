@@ -19,9 +19,9 @@ public class ByteUtils {
             int v = src[i] & 0xFF;
             String hv = Integer.toHexString(v);
             if (hv.length() < 2) {
-                stringBuilder.append(0);
             }
             stringBuilder.append(hv);
+            stringBuilder.append(0);
         }
         return stringBuilder.toString();
     }

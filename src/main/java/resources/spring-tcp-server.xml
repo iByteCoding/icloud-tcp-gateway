@@ -6,11 +6,11 @@
        default-autowire="byName">
 
     <!-- base info start. -->
-    <bean id="tcpServer" class="com.icloud.iot.tcp.connector.tcp.server.TcpServer" init-method="init"
+    <bean id="tcpServer" class="com.ibyte.iot.tcp.connector.tcp.server.TcpServer" init-method="init"
           destroy-method="shutdown">
         <property name="port" value="2000"/>
     </bean>
-    <bean id="tcpSessionManager" class="com.icloud.iot.tcp.connector.tcp.TcpSessionManager">
+    <bean id="tcpSessionManager" class="com.ibyte.iot.tcp.connector.tcp.TcpSessionManager">
         <property name="maxInactiveInterval" value="500"/>
         <property name="sessionListeners">
             <list>
@@ -18,23 +18,23 @@
             </list>
         </property>
     </bean>
-    <bean id="logSessionListener" class="com.icloud.iot.tcp.connector.api.listener.LogSessionListener"/>
-    <bean id="tcpSender" class="com.icloud.iot.tcp.remoting.TcpSender">
+    <bean id="logSessionListener" class="com.ibyte.iot.tcp.connector.api.listener.LogSessionListener"/>
+    <bean id="tcpSender" class="com.ibyte.iot.tcp.remoting.TcpSender">
         <constructor-arg ref="tcpConnector"/>
     </bean>
-    <bean id="serverConfig" class="com.icloud.iot.tcp.connector.tcp.config.ServerTransportConfig">
+    <bean id="serverConfig" class="com.ibyte.iot.tcp.connector.tcp.config.ServerTransportConfig">
         <constructor-arg ref="tcpConnector"/>
         <constructor-arg ref="proxy"/>
         <constructor-arg ref="notify"/>
     </bean>
-    <bean id="tcpConnector" class="com.icloud.iot.tcp.connector.tcp.TcpConnector" init-method="init"
+    <bean id="tcpConnector" class="com.ibyte.iot.tcp.connector.tcp.TcpConnector" init-method="init"
           destroy-method="destroy"/>
-    <bean id="notify" class="com.icloud.iot.tcp.notify.NotifyProxy">
+    <bean id="notify" class="com.ibyte.iot.tcp.notify.NotifyProxy">
         <constructor-arg ref="tcpConnector"/>
     </bean>
     <!-- base info end. -->
     <!-- defined info start. -->
-    <bean id="proxy" class="com.icloud.iot.tcp.server.TestSimpleProxy"/>
+    <bean id="proxy" class="com.ibyte.iot.test.server.TestSimpleProxy"/>
     <!-- defined info end. -->
 </beans>
 
