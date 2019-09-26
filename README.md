@@ -35,6 +35,21 @@ LVS转发给后端的HAProxy，请求经过LVS，但是响应是HAProxy直接反
 #### TCP网关执行时序图
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0116/150230_e846b0a7_1468963.png "屏幕截图.png")
 
+其中步骤一至步骤九是 Netty 服务端的创建时序，步骤十至步骤十三是 TCP 网关容器创建的时序。
+- *步骤一*：创建 ServerBootstrap 实例，ServerBootstrap 是 Netty 服务端的启动辅助类。
+- *步骤二*：设置并绑定 Reactor 线程池，EventLoopGroup 是 Netty 的 Reactor 线程池，EventLoop 负责所有注册到本线程的 Channel。
+- *步骤三*：设置并绑定服务器 Channel，Netty Server 需要创建 NioServerSocketChannel 对象。
+- *步骤四*：TCP 链接建立时创建 ChannelPipeline，ChannelPipeline 本质上是一个负责和执行 ChannelHandler 的职责链。
+- *步骤五*：添加并设置 ChannelHandler，ChannelHandler 串行的加入 ChannelPipeline 中。
+- *步骤六*：绑定监听端口并启动服务端，将 NioServerSocketChannel 注册到 Selector 上。
+- *步骤七*：Selector 轮训，由 EventLoop 负责调度和执行 Selector 轮询操作。
+- *步骤八*：执行网络请求事件通知，轮询准备就绪的 Channel，由 EventLoop 执行 ChannelPipeline。
+- *步骤九*：执行 Netty 系统和业务 ChannelHandler，依次调度并执行 ChannelPipeline 的 ChannelHandler。
+- *步骤十*：通过 Proxy 代理调用后端服务，ChannelRead 事件后，通过发射调度后端 Service。
+- *步骤十一*：创建 Session，Session 与 Connection 是相互依赖关系。
+- *步骤十二*：创建 Connection，Connection 保存 ChannelHandlerContext。
+- *步骤十三*：添加 SessionListener，SessionListener 监听 SessionCreate 和 SessionDestory 等事件。
+
 
 ### 程序运行案例步骤
 > 测试案例，三秒心跳包上传数据包
