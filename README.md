@@ -36,7 +36,7 @@ NioEventLoop 是 Netty 的 Reactor 线程，其角色：
 客户端通过域名+端口访问TCP网关，域名不同的运营商对应不同的VIP，VIP发布在LVS上，LVS将请求转发给后端的HAProxy，再由HAProxy把请求转发给后端的Netty的IP+Port。
 
 LVS转发给后端的HAProxy，请求经过LVS，但是响应是HAProxy直接反馈给客户端的，这也就是LVS的DR模式。
-
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0926/103319_0f13ca35_1468963.png "c5da1236f6d6c151081a215ab3a3170c.png")
 #### TCP网关执行时序图
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0116/150230_e846b0a7_1468963.png "屏幕截图.png")
 
