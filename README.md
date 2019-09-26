@@ -19,6 +19,7 @@ NioEventLoop 是 Netty 的 Reactor 线程，其角色：
 2. *Worker Group*：作为 IO 线程，负责 IO 的读写，从 SocketChannel 中读取报文或向 SocketChannel 写入报文。
 3. *Task Queue／Delay Task Queue*：作为定时任务线程，执行定时任务，例如链路空闲检测和发送心跳消息等。
 
+##### 概要说明
 - TcpServer ：提供TCP连接服务
 - TcpSessionManager: 你可以添加监听事件，用于监听TCP会话创建、销毁等
 - LogSessionListener：一个日志监听器，它和tcpSessionManager关联，监听器必须事先 SessionListener
@@ -29,15 +30,12 @@ NioEventLoop 是 Netty 的 Reactor 线程，其角色：
 
 > 以上都是默认配置,你可以不修改，但是你可能需要换个TCP端口
 
-> ## 1.TCP网关的网络结构
+### .TCP网关的网络结构
 基于Netty构建TCP网关的长连接容器，作为网关接入层提供服务API请求调用。
 
 客户端通过域名+端口访问TCP网关，域名不同的运营商对应不同的VIP，VIP发布在LVS上，LVS将请求转发给后端的HAProxy，再由HAProxy把请求转发给后端的Netty的IP+Port。
 
 LVS转发给后端的HAProxy，请求经过LVS，但是响应是HAProxy直接反馈给客户端的，这也就是LVS的DR模式。
-
-
-
 
 #### TCP网关执行时序图
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0116/150230_e846b0a7_1468963.png "屏幕截图.png")
