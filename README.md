@@ -12,6 +12,13 @@
 ![](https://images.gitee.com/uploads/images/2019/0116/150139_4377424a_1468963.png "屏幕截图.png")
 
 #### 说明
+
+NioEventLoop 是 Netty 的 Reactor 线程，其角色：
+
+1. *Boss Group*：作为服务端 Acceptor 线程，用于 accept 客户端链接，并转发给 WorkerGroup 中的线程。
+2. *Worker Group*：作为 IO 线程，负责 IO 的读写，从 SocketChannel 中读取报文或向 SocketChannel 写入报文。
+3. *Task Queue／Delay Task Queue*：作为定时任务线程，执行定时任务，例如链路空闲检测和发送心跳消息等。
+
 - TcpServer ：提供TCP连接服务
 - TcpSessionManager: 你可以添加监听事件，用于监听TCP会话创建、销毁等
 - LogSessionListener：一个日志监听器，它和tcpSessionManager关联，监听器必须事先 SessionListener
