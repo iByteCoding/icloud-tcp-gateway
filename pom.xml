@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-        <!-- spring 3.2 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
