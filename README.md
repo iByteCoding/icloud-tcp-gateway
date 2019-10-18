@@ -1,7 +1,5 @@
-<p align="center">
-	<font-size: 12px>icloud-tcp-gateway</>
-</p>
-<p align="center">
+## icloud-tcp-gateway
+<p align="left">
 	<a target="_blank" href="https://search.maven.org/search?q=M-PasS">
 		<img src="https://img.shields.io/badge/Maven Central-1.12.0-blue.svg" ></img>
 	</a>
