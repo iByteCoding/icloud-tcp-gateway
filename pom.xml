@@ -80,7 +80,7 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <!--<version>5.0.0.Alpha1</version>-->
-            <version>4.0.24.Final</version>
+            <version>4.1.42.Final</version>
         </dependency>
         <!-- protobuf -->
         <dependency>
